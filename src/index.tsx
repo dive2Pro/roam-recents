@@ -37,18 +37,26 @@ const getCurrentPageInfo = async () => {
         `);
 };
 const CACHE_KEY = "__roam_recents";
+
+type Recent = {
+  uid: string;
+  title: string;
+};
 class Cache {
-  sync(json: string) {
-    localStorage.setItem(CACHE_KEY, json);
+  sync(json: Recent[]) {
+    // localStorage.setItem(CACHE_KEY, json);
+    console.log({ extensionAPI })
+    extensionAPI.settings.set(CACHE_KEY, json);
   }
-  read(): { uid: string; title: string }[] {
+  read() {
     try {
-      return JSON.parse(localStorage.getItem(CACHE_KEY)) || [];
+      return (extensionAPI.settings.get(CACHE_KEY) || []) as Recent[];
     } catch (e) {
       return [];
     }
   }
 }
+
 const cache = new Cache();
 
 function History(props: { hide?: boolean }) {
@@ -65,7 +73,7 @@ function History(props: { hide?: boolean }) {
         recents.splice(found_index, 1);
       }
       recents.unshift(pageInfo);
-      cache.sync(JSON.stringify(recents));
+      cache.sync(recents);
       setRecents([...recents]);
     }
     window.addEventListener("hashchange", onHashChange);
@@ -119,7 +127,7 @@ function NavMenu() {
   const isActive = (_active: string) => {
     return active === _active;
   };
-  console.log(" nav render ")
+  console.log(" nav render ");
   return (
     <ButtonGroup fill className="bp3-dark">
       <Button
@@ -153,9 +161,11 @@ let unload = () => {
   //
 };
 const div = document.createElement("div");
-
+let extensionAPI: RoamExtensionAPI;
 export default {
-  onload() {
+  onload(_extensionAPI: { extensionAPI: RoamExtensionAPI }) {
+    extensionAPI = _extensionAPI.extensionAPI;
+    console.log({ extensionAPI });
     const el_starred_pages = document.querySelector(".starred-pages");
     const el = el_starred_pages.previousElementSibling;
     el_starred_pages.appendChild(div);
