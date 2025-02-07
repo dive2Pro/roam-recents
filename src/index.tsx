@@ -37,6 +37,7 @@ const getCurrentPageInfo = async () => {
         `);
 };
 const CACHE_KEY = "__roam_recents";
+const MAX_LENGTH = 200;
 
 type Recent = {
   uid: string;
@@ -45,7 +46,7 @@ type Recent = {
 class Cache {
   sync(json: Recent[]) {
     // localStorage.setItem(CACHE_KEY, json);
-    console.log({ extensionAPI })
+
     extensionAPI.settings.set(CACHE_KEY, json);
   }
   read() {
@@ -73,8 +74,9 @@ function History(props: { hide?: boolean }) {
         recents.splice(found_index, 1);
       }
       recents.unshift(pageInfo);
-      cache.sync(recents);
-      setRecents([...recents]);
+      const newRecents = recents.slice(0, MAX_LENGTH)
+      cache.sync(newRecents);
+      setRecents([...newRecents]);
     }
     window.addEventListener("hashchange", onHashChange);
     return () => {
@@ -165,11 +167,9 @@ let extensionAPI: RoamExtensionAPI;
 export default {
   onload(_extensionAPI: { extensionAPI: RoamExtensionAPI }) {
     extensionAPI = _extensionAPI.extensionAPI;
-    console.log({ extensionAPI });
     const el_starred_pages = document.querySelector(".starred-pages");
     const el = el_starred_pages.previousElementSibling;
     el_starred_pages.appendChild(div);
-    console.log(" loaded ");
     ReactDOM.render(<NavMenu />, el);
     unload = () => {
       div.remove();

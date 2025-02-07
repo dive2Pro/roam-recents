@@ -1,17 +1,16 @@
-# Roam Plugin Template
+# Roam recents
 
-## how to made a pr for publish
+A smart browsing history tracker for Roam Research, designed to enhance your knowledge management workflow by automatically recording recently visited pages.
 
-0. set up env variables in `.github/workflows/main.yaml`
-1. commit your changes
-2. tag this commit with a tag that was starts with "publish"
+## ✨ Key Features
 
-## set up env variables
+- Real-time page navigation monitoring
+- Intelligent page type detection (Daily Notes/Regular Pages)
 
- 
+## 📚 History Management
 
-- FORK: 'dive2Pro' // your fork repo's name
-- USER: 'dive2Pro' // use for git config username
-- EMAIL: 'toylucklebo@gmail.com' // git config email
-- BRANCH: 'Native-Dark' // fork repo's  branch name
-- EXTENSION_JSON: 'extensions/hyc/roam-native-dark.json'
+- Dynamic recent pages queue (15 entries by default)
+- Automatic deduplication of consecutive visits
+
+## 🎨 Native UI Integration
+
