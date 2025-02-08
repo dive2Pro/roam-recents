@@ -1,18 +1,30 @@
 # Roam recents
 
-A smart browsing history tracker for Roam Research, designed to enhance your knowledge management workflow by automatically recording recently visited pages.
+A Roam Research extension that tracks and manages your recently visited pages in main view.
 
-## ✨ Key Features
+## Features ✨
 
-- Real-time page navigation monitoring
-- Intelligent page type detection (Daily Notes/Regular Pages)
+- Automatic Page Tracking
 
-## 📚 History Management
+    Records every page visit in main view while you work
 
-- Dynamic recent pages queue (50 entries by default)
-- Automatic deduplication of consecutive visits
-- 
+- Smart Filtering
 
-## 🎨 Native UI Integration
+    Automatically ignores non-page entries like:
 
-- 
+  - "All Pages"
+  - Daily Notes
+  - Graph overview
+
+- Customizable History Size
+
+  - Default: 50 entries
+  - Configurable via settings
+
+- Automatic Deduplication
+
+    Ensures unique entries without manual cleanup
+
+- Cloud Sync
+  - Securely stores history data on roam server
+  - Syncs across devices
