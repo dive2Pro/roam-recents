@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Button, ButtonGroup } from "@blueprintjs/core";
 import { initConfig, maxLength } from "./config";
-
+import "./style.less"
 declare global {
   interface Window {
     roamAlphaAPI: any;
