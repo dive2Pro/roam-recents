@@ -12,9 +12,9 @@ jobs:
       FORK: '${{ github.repository_owner }}'
       USER: 'dive2Pro'
       EMAIL: 'toylucklebo@gmail.com'
-      BRANCH: ''
-      EXTENSION_DIR: 'extensions/...'
-      EXTENSION_JSON: 'extensions/....json'
+      BRANCH: 'roam-recents'
+      EXTENSION_DIR: 'extensions/hyc'
+      EXTENSION_JSON: 'extensions/hyc/roam-recents.json'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
