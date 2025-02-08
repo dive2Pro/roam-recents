@@ -9,8 +9,10 @@ A smart browsing history tracker for Roam Research, designed to enhance your kno
 
 ## 📚 History Management
 
-- Dynamic recent pages queue (15 entries by default)
+- Dynamic recent pages queue (50 entries by default)
 - Automatic deduplication of consecutive visits
+- 
 
 ## 🎨 Native UI Integration
 
+- 

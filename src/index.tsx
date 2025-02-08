@@ -130,7 +130,6 @@ function NavMenu() {
   const isActive = (_active: string) => {
     return active === _active;
   };
-  console.log(" nav render ");
   return (
     <ButtonGroup fill className="bp3-dark">
       <Button
@@ -168,13 +167,16 @@ let extensionAPI: RoamExtensionAPI;
 export default {
   onload(_extensionAPI: { extensionAPI: RoamExtensionAPI }) {
     extensionAPI = _extensionAPI.extensionAPI;
-    initConfig(extensionAPI)
+    initConfig(extensionAPI);
     const el_starred_pages = document.querySelector(".starred-pages");
     const el = el_starred_pages.previousElementSibling;
+    const originNode = el.cloneNode(true);
     el_starred_pages.appendChild(div);
     ReactDOM.render(<NavMenu />, el);
     unload = () => {
-      div.remove();
+      ReactDOM.unmountComponentAtNode(el);
+      ReactDOM.unmountComponentAtNode(div);
+      el.replaceWith(originNode);
     };
   },
   onunload() {
