@@ -90,14 +90,7 @@ function History(props: { hide?: boolean }) {
   }
   return (
     <section
-      style={{
-        position: "absolute",
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        backgroundColor: "#182026",
-      }}
+      className="roam-recents-el"
     >
       {recents.map((recent) => {
         return (
