@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Button, ButtonGroup } from "@blueprintjs/core";
+import { initConfig, maxLength } from "./config";
 
 declare global {
   interface Window {
@@ -37,7 +38,6 @@ const getCurrentPageInfo = async () => {
         `);
 };
 const CACHE_KEY = "__roam_recents";
-const MAX_LENGTH = 200;
 
 type Recent = {
   uid: string;
@@ -74,10 +74,11 @@ function History(props: { hide?: boolean }) {
         recents.splice(found_index, 1);
       }
       recents.unshift(pageInfo);
-      const newRecents = recents.slice(0, MAX_LENGTH)
+      const newRecents = recents.slice(0, maxLength());
       cache.sync(newRecents);
       setRecents([...newRecents]);
     }
+    onHashChange()
     window.addEventListener("hashchange", onHashChange);
     return () => {
       window.removeEventListener("hashchange", onHashChange);
@@ -167,6 +168,7 @@ let extensionAPI: RoamExtensionAPI;
 export default {
   onload(_extensionAPI: { extensionAPI: RoamExtensionAPI }) {
     extensionAPI = _extensionAPI.extensionAPI;
+    initConfig(extensionAPI)
     const el_starred_pages = document.querySelector(".starred-pages");
     const el = el_starred_pages.previousElementSibling;
     el_starred_pages.appendChild(div);
