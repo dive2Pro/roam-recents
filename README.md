@@ -2,7 +2,8 @@
 
 A Roam Research extension that tracks and manages your recently visited pages in main view.
 
-<img src="https://github.com/user-attachments/assets/50f01907-4778-4aa3-9376-82bbec819773"  height="450"/>
+![image](https://github.com/user-attachments/assets/3dd03098-3940-428a-875b-eb98ae05f37c)
+
 
 
 > At the top of the page is the 'Roam Tabs' plugin, which is also available for installation through the Roam Depot.
