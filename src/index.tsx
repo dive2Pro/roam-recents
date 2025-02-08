@@ -141,7 +141,7 @@ function NavMenu() {
         icon="star"
         active={isActive("star")}
       >
-        <small>Shorcuts</small>
+        <small>Shortcuts</small>
       </Button>
 
       <Button
