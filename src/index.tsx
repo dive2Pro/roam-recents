@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Button, ButtonGroup } from "@blueprintjs/core";
+import { Button, ButtonGroup, ControlGroup, Icon, Tab, Tabs } from "@blueprintjs/core";
 import { initConfig, maxLength } from "./config";
-import "./style.less"
+import "./style.less";
 declare global {
   interface Window {
     roamAlphaAPI: any;
@@ -78,7 +78,7 @@ function History(props: { hide?: boolean }) {
       cache.sync(newRecents);
       setRecents([...newRecents]);
     }
-    onHashChange()
+    onHashChange();
     window.addEventListener("hashchange", onHashChange);
     return () => {
       window.removeEventListener("hashchange", onHashChange);
@@ -89,9 +89,7 @@ function History(props: { hide?: boolean }) {
     return null;
   }
   return (
-    <section
-      className="roam-recents-el"
-    >
+    <section className="roam-recents-el">
       {recents.map((recent) => {
         return (
           <a
@@ -123,32 +121,78 @@ function NavMenu() {
   const isActive = (_active: string) => {
     return active === _active;
   };
-  return (
-    <ButtonGroup fill className="bp3-dark">
-      <Button
-        intent={isActive("star") ? "primary" : "none"}
-        onClick={() => {
-          setActive("star");
-          ReactDOM.render(<History hide={true} />, div);
-        }}
-        icon="star"
-        active={isActive("star")}
-      >
-        <small>Shortcuts</small>
-      </Button>
+  // return (
+  //   <ControlGroup fill  className="bp3-dark roam-recents-menus">
+  //     <Button
+  //       intent={isActive("star") ? "primary" : "none"}
+  //       onClick={() => {
+  //         setActive("star");
+  //         ReactDOM.render(<History hide={true} />, div);
+  //       }}
+  //       outlined
+  //       icon="star"
+  //     >
+  //       <small>Shortcuts</small>
+  //     </Button>
 
-      <Button
-        intent={isActive("time") ? "primary" : "none"}
-        onClick={() => {
-          setActive("time");
-          ReactDOM.render(<History />, div);
-        }}
-        icon="time"
-        active={isActive("time")}
-      >
-        <small>Recents</small>
-      </Button>
-    </ButtonGroup>
+  //     <Button
+  //       intent={isActive("time") ? "primary" : "none"}
+  //       outlined
+  //       onClick={() => {
+  //         setActive("time");
+  //         ReactDOM.render(<History />, div);
+  //       }}
+  //       icon="time"
+  //     >
+  //       <small>Recents</small>
+  //     </Button>
+  //   </ControlGroup>
+  // );
+  return (
+    // @ts-ignore
+    <Tabs
+      id="roam-recents-tabs"
+      className="roam-recents-menus"
+      selectedTabId={active}
+    >
+      <Tab
+        id={"star"}
+        title={
+          <div
+            className="bp3-tab flex gap-1.5"
+            aria-selected={isActive("star")}
+            onClick={() => {
+              setActive("star");
+              ReactDOM.render(<History hide={true} />, div);
+            }}
+          >
+            <Icon
+              icon="star"
+            />
+            <small>Shortcuts</small>
+          </div>
+        }
+      />
+      <Tab
+        id={"time"}
+        title={
+          <div
+            className="bp3-tab flex gap-1.5"
+            aria-selected={isActive("time")}
+            onClick={() => {
+              setActive("time");
+              ReactDOM.render(<History />, div);
+            }}
+          >
+            <Icon
+              icon="time"
+
+            ></Icon>
+            <small>Recents</small>
+          </div>
+        }
+      />
+    </Tabs>
   );
 }
 
