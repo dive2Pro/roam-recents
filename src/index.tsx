@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Button, ButtonGroup, ControlGroup, Icon, Tab, Tabs } from "@blueprintjs/core";
+import {
+  Button,
+  ButtonGroup,
+  ControlGroup,
+  Icon,
+  Tab,
+  Tabs,
+  Toaster,
+} from "@blueprintjs/core";
 import { initConfig, maxLength } from "./config";
 import "./style.less";
 declare global {
@@ -90,12 +98,29 @@ function History(props: { hide?: boolean }) {
   }
   return (
     <section className="roam-recents-el">
-      {recents.map((recent) => {
+      {recents.map((recent, index) => {
         return (
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
+              const target = window.roamAlphaAPI.q(`
+                  [
+                    :find ?e .
+                    :where
+                    [?e :block/uid "${recent.uid}"]
+                  ]
+                `);
+              if (!target) {
+                recents.splice(index, 1);
+                setRecents([...recents]);
+                cache.sync([...recents]);
+                Toaster.create({}).show({
+                  intent: "warning",
+                  message: `This page ${recent.title} has been deleted.`,
+                });
+                return;
+              }
               if (e.shiftKey) {
                 window.roamAlphaAPI.ui.rightSidebar.addWindow({
                   window: { type: "block", "block-uid": recent.uid },
@@ -166,9 +191,7 @@ function NavMenu() {
               ReactDOM.render(<History hide={true} />, div);
             }}
           >
-            <Icon
-              icon="star"
-            />
+            <Icon icon="star" />
             <small>Shortcuts</small>
           </div>
         }
@@ -184,10 +207,7 @@ function NavMenu() {
               ReactDOM.render(<History />, div);
             }}
           >
-            <Icon
-              icon="time"
-
-            ></Icon>
+            <Icon icon="time"></Icon>
             <small>Recents</small>
           </div>
         }
