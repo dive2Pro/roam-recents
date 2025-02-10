@@ -34,3 +34,8 @@ A Roam Research extension that tracks and manages your recently visited pages in
 - Cloud Sync
   - Securely stores history data on roam server
   - Syncs across devices
+
+- Enhanced Compatibility
+
+  - Full compatibility with Roam Native Dark theme and Roam Studio
+  - Collaborative integration with Roam Tabs plugin
