@@ -2,7 +2,8 @@
 
 A Roam Research extension that tracks and manages your recently visited pages in main view.
 
-![image](https://github.com/user-attachments/assets/3dd03098-3940-428a-875b-eb98ae05f37c)
+![image](https://github.com/user-attachments/assets/99a4e0f3-5441-4b4e-9c2c-c75567c2ca3e)
+
 
 
 
