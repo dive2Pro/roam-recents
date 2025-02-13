@@ -91,7 +91,7 @@ function History(props: { hide?: boolean }) {
     return () => {
       window.removeEventListener("hashchange", onHashChange);
     };
-  }, []);
+  }, [recents]);
 
   if (props.hide) {
     return null;
