@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 import {
   Button,
@@ -70,10 +70,12 @@ const cache = new Cache();
 
 function History(props: { hide?: boolean }) {
   const [recents, setRecents] = React.useState(() => cache.read());
-
+  const recentsRef = useRef(recents)
+  recentsRef.current = recents
   React.useEffect(() => {
     async function onHashChange() {
       const pageInfo = await getCurrentPageInfo();
+      const recents = recentsRef.current
       const found_index = recents.findIndex((item) => {
         return item.uid === pageInfo.uid;
       });
@@ -91,7 +93,7 @@ function History(props: { hide?: boolean }) {
     return () => {
       window.removeEventListener("hashchange", onHashChange);
     };
-  }, [recents]);
+  }, []);
 
   if (props.hide) {
     return null;
