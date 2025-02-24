@@ -38,5 +38,5 @@ A Roam Research extension that tracks and manages your recently visited pages in
 
 - Enhanced Compatibility
 
-  - Full compatibility with Roam Native Dark theme and Roam Studio
+  - Full compatibility with Roam Native Dark theme and Roam Studio, blueprint theme
   - Collaborative integration with Roam Tabs plugin

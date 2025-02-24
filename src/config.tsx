@@ -15,7 +15,7 @@ export function initConfig(roamExtensionAPI: RoamExtensionAPI) {
       {
         id: KEY_MAX_LENGTH,
         name: "max length",
-        description: "max length for recent log entries2",
+        description: "max length for recent log entries",
         action: {
           type: "reactComponent",
           component: function NumberInput() {
