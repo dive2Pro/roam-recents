@@ -10,7 +10,7 @@
     right: 0px;
     top: 0px;
     bottom: 0px;
-    background-color: var(--bc-left-sidebar, #182026);
+    background-color: var(--zr-box-bg, var(--bc-left-sidebar, #182026))
 }
 
 .bp3-dark .roam-recents-el {
@@ -51,4 +51,23 @@
     .bp3-tab-indicator-wrapper .bp3-tab-indicator {
         background-color: var(--indicator-color);
     }
+}
+
+// 兼容 blueprint plugin ---
+
+.roam-app .starred-pages-wrapper>.title {
+    display: block;
+}
+
+.roam-app .starred-pages-wrapper .title>div {
+    display: block;
+}
+
+
+.roam-app .starred-pages-wrapper .title:after {
+    display: none;
+}
+
+.roam-app .starred-pages-wrapper .title span:not(.bp3-icon-star) {
+    display: block;
 }
