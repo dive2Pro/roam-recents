@@ -27,6 +27,7 @@ A Roam Research extension that tracks and manages your recently visited pages in
 
   - Default: 50 entries
   - Configurable via settings
+  - Entries can be deleted.
 
 - Automatic Deduplication
 
