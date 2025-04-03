@@ -70,12 +70,12 @@ const cache = new Cache();
 
 function History(props: { hide?: boolean }) {
   const [recents, setRecents] = React.useState(() => cache.read());
-  const recentsRef = useRef(recents)
-  recentsRef.current = recents
+  const recentsRef = useRef(recents);
+  recentsRef.current = recents;
   React.useEffect(() => {
     async function onHashChange() {
       const pageInfo = await getCurrentPageInfo();
-      const recents = recentsRef.current
+      const recents = recentsRef.current;
       const found_index = recents.findIndex((item) => {
         return item.uid === pageInfo.uid;
       });
@@ -135,7 +135,30 @@ function History(props: { hide?: boolean }) {
               return false;
             }}
           >
-            <div className="page">{recent.title}</div>
+            <Button
+              className="page"
+              minimal
+              fill
+              active={false}
+              alignText="left"
+              rightIcon={
+                <Button
+                  icon={"cross"}
+                  minimal
+                  className="hover-visible"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    recents.splice(index, 1);
+                    setRecents([...recents]);
+                    cache.sync([...recents]);
+                    return false;
+                  }}
+                ></Button>
+              }
+            >
+              <div>{recent.title}</div>
+            </Button>
           </a>
         );
       })}
